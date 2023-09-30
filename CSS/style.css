@@ -1,0 +1,196 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    direction: rtl;
+    background: linear-gradient(45deg, #240165, #05001c);
+    /* V */
+    font-family: 'Tajawal', sans-serif;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Small */
+@media (min-width: 786px) {
+    .container {
+        width: 750px;
+    }
+}
+
+/* Medium */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    /* V */
+}
+
+/* < !-- City Name & Date --> */
+
+.cityNameAndCityData {
+    margin-right: 40px;
+    color: white;
+}
+
+.city-name {
+    font-size: 6rem;
+    font-weight: 400;
+}
+
+.city-date {
+    font-size: 1.6rem;
+    font-weight: 200;
+}
+
+@media (max-width: 991px) {
+    .city-name {
+        font-size: 4rem;
+    }
+
+    .city-date {
+        font-size: 1.5rem;
+    }
+}
+
+hr {
+    margin: 1rem;
+    border-color: #5200e1;
+}
+
+/* _________________________________ */
+
+/* < !-- Prayer Timing --> */
+
+.cards {
+    height: 300px;
+    justify-content: space-around;
+}
+
+@media (max-width: 767px) {
+    .cards {
+        height: 820px;
+        flex-direction: column;
+    }
+}
+
+.card {
+    width: 14%;
+    height: 88%;
+    background-color: white;
+    font-size: 20px;
+    box-shadow: 0px 10px 5px rgb(0 0 0 / 30%);
+    border-radius: 0.75rem;
+}
+
+@media (max-width: 991px) {
+    .card {
+        width: 14.5%;
+        height: 65%;
+    }
+}
+
+@media (max-width: 767px) {
+    .card {
+        height: 15%;
+        width: 35%;
+    }
+}
+
+.header {
+    background: linear-gradient(45deg, #5709ee, #7a37bf);
+    color: white;
+    border-top-right-radius: 0.75rem;
+    border-top-left-radius: 0.75rem;
+}
+
+.header h1 {
+    font-weight: 400;
+    padding: 5px;
+    font-size: 2rem;
+}
+
+@media (max-width: 991px) {
+    .card .header h1 {
+        font-size: 1.45rem;
+    }
+}
+
+.body {
+    height: 80%;
+}
+
+@media (max-width: 991px) {
+    .card .body h1 {
+        font-size: 2.2rem;
+    }
+}
+
+.time {
+    font-size: 3rem;
+}
+
+/* _________________________________ */
+
+
+/* < !-- Change City Select --> */
+
+select {
+    width: 300px;
+    height: 50px;
+    font-size: 25px;
+    font-family: 'Tajawal', sans-serif;
+    background: none;
+    color: white;
+    margin-top: 3.5rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 991px) {
+    select {
+        margin-top: 0rem;
+    }
+}
+
+@media (max-width: 767px) {
+    select {
+        margin-top: 2rem;
+    }
+}
+
+select option {
+    color: black;
+}
+
+/* __________________________________ */

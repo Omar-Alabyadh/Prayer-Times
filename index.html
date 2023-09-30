@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <!-- Tajawal Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!---->
+    <title>أوقات الصلاة - Prayer Times</title>
+  </head>
+  <body>
+    <div class="container" style="height: 100vh">
+      <!-- City Name & Date -->
+      <div style="margin-top: -1.25rem">
+        <!-- City Name -->
+        <div class="cityNameAndCityData">
+          <h1 class="city-name">بنغازي</h1>
+          <h6 class="city-date">الجمعة 24 نوفمبر</h6>
+        </div>
+        <hr />
+        <!---->
+
+        <!-- Prayer Timings -->
+        <div class="cards center">
+          <!-- Card -->
+          <div class="card">
+            <div class="header">
+              <h1 class="time">الفجر</h1>
+            </div>
+            <div class="body center">
+              <h1 class="time" id="fajr-time">4.30</h1>
+            </div>
+          </div>
+          <!---->
+
+          <!-- Card -->
+          <div class="card">
+            <div class="header">
+              <h1 class="time">الشروق</h1>
+            </div>
+            <div class="body center">
+              <h1 class="time" id="sunrise-time">4.30</h1>
+            </div>
+          </div>
+          <!---->
+
+          <!-- Card -->
+          <div class="card">
+            <div class="header">
+              <h1 class="time">الظهر</h1>
+            </div>
+            <div class="body center">
+              <h1 class="time" id="dhuhr-time">4.30</h1>
+            </div>
+          </div>
+          <!---->
+
+          <!-- Card -->
+          <div class="card">
+            <div class="header">
+              <h1 class="time">العصر</h1>
+            </div>
+            <div class="body center">
+              <h1 class="time" id="asr-time">4.30</h1>
+            </div>
+          </div>
+          <!---->
+
+          <!-- Card -->
+          <div class="card">
+            <div class="header">
+              <h1 class="time">المغرب</h1>
+            </div>
+            <div class="body center">
+              <h1 class="time" id="sunset-time">4.30</h1>
+            </div>
+          </div>
+          <!---->
+
+          <!-- Card -->
+          <div class="card">
+            <div class="header">
+              <h1 class="time">العشاء</h1>
+            </div>
+            <div class="body center">
+              <h1 class="time" id="isha-time">4.30</h1>
+            </div>
+          </div>
+          <!---->
+        </div>
+        <!---->
+
+        <!-- Change City Select -->
+        <div class="center">
+          <select name="" id="cities-select"></select>
+        </div>
+        <!---->
+      </div>
+      <!---->
+    </div>
+    <script src="./JS/script.js"></script>
+  </body>
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <script>
+    let cities = [
+      {
+        arabicName: "بنغازي",
+        name: "Banghāzī",
+      },
+      {
+        arabicName: "طرابلس",
+        name: "Tripoli",
+      },
+      {
+        arabicName: "إجدابيا",
+        name: "Ajdabiya",
+      },
+      {
+        arabicName: "سبها",
+        name: "Sabhā",
+      },
+      {
+        arabicName: "البيضاء",
+        name: "Al Jabal al Akhḑar",
+      },
+    ];
+
+    for (let city of cities) {
+      const content = `
+      <option>${city.arabicName}</option>
+      `;
+      document.getElementById("cities-select").innerHTML += content;
+    }
+
+    document
+      .getElementById("cities-select")
+      .addEventListener("change", function () {
+        document.querySelector(".city-name").innerHTML = this.value;
+
+        let cityName = "";
+        for (let city of cities) {
+          if (city.arabicName == this.value) {
+            cityName = city.name;
+          }
+        }
+        getPrayerTimingsOfCity(cityName);
+      });
+
+    function getPrayerTimingsOfCity(cityName) {
+      let params = {
+        country: "LY",
+        city: cityName,
+      };
+
+      axios
+        .get("http://api.aladhan.com/v1/timingsByCity", {
+          params: params,
+        })
+        .then(function (response) {
+          const timings = response.data.data.timings;
+          fillTimeForPrayer("fajr-time", timings.Fajr);
+          fillTimeForPrayer("sunrise-time", timings.Sunrise);
+          fillTimeForPrayer("dhuhr-time", timings.Dhuhr);
+          fillTimeForPrayer("asr-time", timings.Asr);
+          fillTimeForPrayer("sunset-time", timings.Sunset);
+          fillTimeForPrayer("isha-time", timings.Isha);
+
+          const readableData = response.data.data.date.readable;
+          const weekDay = response.data.data.date.hijri.weekday.ar;
+          const date = `(<b>${weekDay}</b>  ) : ${readableData}`;
+          document.querySelector(".city-date").innerHTML = date;
+          console.log(`${readableData} ${weekDay}`);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    getPrayerTimingsOfCity("Banghāzī");
+
+    function fillTimeForPrayer(id, time) {
+      document.getElementById(id).innerHTML = time;
+    }
+  </script>
+</html>
