@@ -1,6 +1,14 @@
-# Prayer Times Website
+<div align="center">
+    
+  <h2 align="center">Prayer Times Website</h2>
 
-This is a website that displays the call to prayer times. It fetches the prayer times from an API and provides accurate and up-to-date information for users.
+  This is a website that displays the call to prayer times. It fetches the prayer times from an API and provides accurate and up-to-date information for users.
+
+  <a href="https://omar-alabyadh.github.io/Prayer-Times/"><strong>➥ Live Demo</strong></a>
+
+</div>
+
+<br />
 
 ## Features
 
